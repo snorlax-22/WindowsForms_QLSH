@@ -12,17 +12,17 @@ namespace WindowsForms_QLSH.APIs
 {
 
 
-    class GetAPIs
+    class PostAPIs
     {
         APIHelper apiHelper = new APIHelper();
-        public JObject GetAllRole()
+        public JObject PostAcount(string account)
         {
            
             //bước 1: tạo httpwebrequest + tên API + phương thức
             HttpWebRequest httpWebRequest = apiHelper.initRequest("api/v1/GetAllRole", "POST");
             
             //bước 2: tạo body để gửi, ở đây body là {}
-            createSendBody(httpWebRequest,null);
+            createSendBody(httpWebRequest, account);
 
             //bước 3: lấy kqua trả về từ response
             StreamReader responseReader = CreateresponseReader(httpWebRequest);
@@ -33,46 +33,6 @@ namespace WindowsForms_QLSH.APIs
 
             return jObject;
         }
-
-        public JObject GetAllFlower()
-        {
-
-            //bước 1: tạo httpwebrequest + tên API + phương thức
-            HttpWebRequest httpWebRequest = apiHelper.initRequest("api/v1/GetAllFlower", "POST");
-
-            //bước 2: tạo body để gửi, ở đây body là {}
-            createSendBody(httpWebRequest, null);
-
-            //bước 3: lấy kqua trả về từ response
-            StreamReader responseReader = CreateresponseReader(httpWebRequest);
-
-            //bước 4: parse response ra JObject
-            string strReceiveContent = responseReader.ReadToEnd();
-            JObject jObject = JObject.Parse(strReceiveContent);
-
-            return jObject;
-        }
-
-        public JObject GetAllTransaction()
-        {
-
-            //bước 1: tạo httpwebrequest + tên API + phương thức
-            HttpWebRequest httpWebRequest = apiHelper.initRequest("api/v1/GetAllTransaction", "POST");
-
-            //bước 2: tạo body để gửi, ở đây body là {}== null
-            createSendBody(httpWebRequest, null);
-
-            //bước 3: lấy kqua trả về từ response
-            StreamReader responseReader = CreateresponseReader(httpWebRequest);
-
-            //bước 4: parse response ra JObject
-            string strReceiveContent = responseReader.ReadToEnd();
-            JObject jObject = JObject.Parse(strReceiveContent);
-
-            return jObject;
-        }
-
-
 
         private static void createSendBody(HttpWebRequest httpWebRequest, string strSendContent)
         {
