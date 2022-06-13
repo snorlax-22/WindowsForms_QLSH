@@ -1,29 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Net.Http;
-//using System.Net.Http.Formatting;
-using System.Net.Http.Headers;
-using Newtonsoft.Json;
-using System.Net.Mime;
-using System.Net;
-using System.Reflection;
-using System.IO;
-using RestSharp;
+﻿//using System.Net.Http.Formatting;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Windows.Forms;
 using WindowsForms_QLSH.APIs;
-using WindowsForms_QLSH.Models;
-using System.Data.SqlClient;
-using System.Configuration;
-using System.Web.UI.WebControls;
-using Image = System.Drawing.Image;
 using WindowsForms_QLSH.Forms;
+
 
 namespace WindowsForms_QLSH
 {
@@ -36,18 +17,27 @@ namespace WindowsForms_QLSH
         PostAPIs postAPIs = new PostAPIs();
         private Form activeForm;
 
+        [System.Runtime.InteropServices.DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+
+        [System.Runtime.InteropServices.DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+
+
         public Form1()
         {
+
             InitializeComponent();
 
-            this.FormBorderStyle = FormBorderStyle.None;
+
             //Telling the operating system that we want to set the start position manually
-            this.StartPosition = FormStartPosition.CenterScreen;
+
 
             //Actually setting our Width, Height, and Location
-            this.Height = Screen.PrimaryScreen.WorkingArea.Height;
-            this.Width = Screen.PrimaryScreen.WorkingArea.Width;
-            this.Location = Screen.PrimaryScreen.WorkingArea.Location;
+
+            
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
 
             listflowerjson = getAPIs.GetAllFlower()["responseData"]["data"];
             //----------Cách gọi post API
@@ -156,7 +146,9 @@ namespace WindowsForms_QLSH
 
         private void button1_Click_2(object sender, EventArgs e)
         {
-            openChildForm(new FormBill(), sender);
+            
+            
+            openChildForm(new FormBill(listflowerjson), sender);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -166,6 +158,7 @@ namespace WindowsForms_QLSH
 
         private void button3_Click(object sender, EventArgs e)
         {
+           
             openChildForm(new FormProducts(listflowerjson), sender);
         }
 
@@ -173,14 +166,20 @@ namespace WindowsForms_QLSH
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+           
             openChildForm(new FormCRM(), sender);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            
+            DisableCreateBillButton();
         }
+
+        private void DisableCreateBillButton()
+        {
+          
+        }
+
 
         private void label1_Click_1(object sender, EventArgs e)
         {
@@ -204,7 +203,31 @@ namespace WindowsForms_QLSH
 
         private void button4_Click_2(object sender, EventArgs e)
         {
+            if(this.WindowState == FormWindowState.Maximized)
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+            else
+            {
+               this.WindowState = FormWindowState.Maximized;
+            }
+            
+        }
+
+        private void title_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void button6_Click_1(object sender, EventArgs e)
+        {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnCreateBill_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

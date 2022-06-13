@@ -173,6 +173,16 @@ namespace WindowsForms_QLSH.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_multiply_48__1_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8_multiply_48__1_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_paid_bill_24 {
             get {
                 object obj = ResourceManager.GetObject("icons8_paid_bill_24", resourceCulture);

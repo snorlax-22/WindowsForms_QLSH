@@ -229,6 +229,8 @@
     <Content Include="Resources\icons8-crm-50 %281%29.png" />
     <Content Include="Resources\icons8-flower-doodle-50.png" />
     <Content Include="Resources\icons8-invoice-50 %282%29.png" />
+    <None Include="Resources\icons8-multiply-48 %281%29.png" />
+    <Content Include="Resources\icons8-multiply-48.png" />
     <Content Include="Resources\icons8-paid-bill-50 %281%29.png" />
     <Content Include="Resources\icons8-revenue-50.png" />
     <Content Include="Resources\icons8-revenue-64.png" />
