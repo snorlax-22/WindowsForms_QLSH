@@ -42,17 +42,32 @@ namespace WindowsForms_QLSH
             listflowerjson = getAPIs.GetAllFlower()["responseData"]["data"];
             //----------Cách gọi post API
 
+            //var body = @"{""email"":""da4kkkji@gmail.com"",
+            //             " + "\n" +
+            //                @"    ""password"":""1234"",
+            //             " + "\n" +
+            //                @"    ""phone"":""0923000327"",
+            //             " + "\n" +
+            //                @"    ""address"":""12312fdsf"",
+            //             " + "\n" +
+            //                @"    ""name"":""doan"",
+            //             " + "\n" +
+            //                @"    ""idRole"":2
+            //             " + "\n" +
+            //                @"}";
+            //postAPIs.PostAcount(body);
+
             //try
             //{
             //    var body = @"{""email"":""ptit@gmail.com"",
             //                " + "\n" +
             //               @"    ""password"":""1234"",
             //                " + "\n" +
-            //                @"    ""phone"":""0926619327"",
+            //                @"    ""phone"":""0936619327"",
             //                " + "\n" +
             //                @"    ""address"":""1231234@ffdsf"",
             //                " + "\n" +
-            //                @"    ""name"":""doan"",
+            //                @"    ""name"":""doa11n"",
             //                " + "\n" +
             //                @"    ""idRole"":2
             //                " + "\n" +
@@ -86,12 +101,13 @@ namespace WindowsForms_QLSH
             //Image img = Image.FromStream(ms);
         }
 
-        private void openChildForm(Form childForm, object btnSender)
+        public void openChildForm(Form childForm, object btnSender)
         {
             //if(activeForm != null)
             //{
             //    activeForm.Close();
             //}
+            //mở Form được truyền vào
             activeForm = childForm;
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
@@ -216,6 +232,7 @@ namespace WindowsForms_QLSH
 
         private void title_MouseDown(object sender, MouseEventArgs e)
         {
+            //kéo thả được form bằng cách giữ chuột ở title
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }

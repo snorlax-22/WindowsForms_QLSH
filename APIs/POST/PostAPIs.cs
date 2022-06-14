@@ -19,9 +19,9 @@ namespace WindowsForms_QLSH.APIs
         {
            
             //bước 1: tạo httpwebrequest + tên API + phương thức
-            HttpWebRequest httpWebRequest = apiHelper.initRequest("api/v1/GetAllRole", "POST");
+            HttpWebRequest httpWebRequest = apiHelper.initRequest("api/v1/PostAccount", "POST");
             
-            //bước 2: tạo body để gửi, ở đây body là {}
+            //bước 2: tạo body để gửi, ở đây body là account (kiểu jSonstring)
             createSendBody(httpWebRequest, account);
 
             //bước 3: lấy kqua trả về từ response
@@ -36,14 +36,14 @@ namespace WindowsForms_QLSH.APIs
 
         private static void createSendBody(HttpWebRequest httpWebRequest, string strSendContent)
         {
-            JObject jObjectSendContent = null;
+            //JObject jObjectSendContent = null;
 
             if(strSendContent == null)
             {
                 strSendContent = string.Empty;
             }
-            
-            strSendContent = JsonConvert.SerializeObject(jObjectSendContent);
+
+            //strSendContent = JsonConvert.SerializeObject(strSendContent);
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
                 streamWriter.Write(strSendContent);

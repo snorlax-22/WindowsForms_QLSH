@@ -17,23 +17,35 @@ namespace WindowsForms_QLSH.Forms
     {
         public FormBill(JToken listflowerjson)
         {
+            //form POS (Tính tiền sản phẩm cho khách)
             InitializeComponent();
-            
+            button1.Enabled = false;
+            button1.Visible = false;
+
+            float totalBill = 0;
             GetAPIs getAPIs = new GetAPIs();
+            List<Flower> listFlowerbill = new List<Flower>();
             
 
-
+            FlowLayoutPanel flowLayoutPanel2 = new FlowLayoutPanel();
             IList<Flower> flowers;
             Size size = new Size(200, 200);
+            
+            Label textBoxTotal = new Label();
+            textBoxTotal.Location = new Point(280, 0);
+            tabControl1.SelectedTab.Controls.Add(textBoxTotal);
+            flowLayoutPanel2.AutoSize = true;
 
             try
             {
-                //var listflowerjson = getAPIs.GetAllFlower()["responseData"]["data"];
+                //lấy List hoa từ API trả về
                 flowers = listflowerjson.ToObject<IList<Flower>>();
 
-                //there are many flowers in the list with the same name, so we need to remove duplicate
+                //lọc các hoa có trùng tên
                 var listflower = flowers.GroupBy(x => x.name).Select(y => y.First()).ToList();
-
+               
+                
+                //tạo các ô hoa riêng biệt
                 foreach (var item in listflower)
                 {
 
@@ -43,13 +55,31 @@ namespace WindowsForms_QLSH.Forms
                         Size = size,
 
                     };
+                    
+                    //set event cho UserControl hoa (Ô hoa)
+                    uc.MouseDown += (sender, e) =>
+                    {
+                        totalBill = totalBill + item.price;
+  
+                        textBoxTotal.Text = "Tổng cộng: "+ totalBill.ToString();
 
-                    uc.MouseDown += (sender, e) => { uc.BorderStyle = BorderStyle.FixedSingle; };
+                        //Mỗi lần click sẽ tạo ra 2 label có Text là tên hoa + giá tiền
+                        flowLayoutPanel2.Controls.Add(AddNewLabel(item.name));
+                        flowLayoutPanel2.Controls.Add(AddNewLabel(item.price.ToString()));
+                        textBoxTotal.AutoSize = true;
+                        textBoxTotal.Update();
+                        
+                        tabControl1.SelectedTab.Controls.Add(flowLayoutPanel2);
+
+                        
+                    };
                     uc.MouseUp += (sender, e) => { uc.BorderStyle = BorderStyle.None; };
+
                     flowLayoutPanel1.Controls.Add(uc);
-
-
                 }
+                flowLayoutPanel2.FlowDirection = FlowDirection.TopDown;
+                
+
                 flowLayoutPanel1.AutoScroll = true;
 
             }
@@ -59,6 +89,13 @@ namespace WindowsForms_QLSH.Forms
                 string strerrormessagedetail = objex.ToString();
                 MessageBox.Show(strerrormessagedetail, strerrormessage);
             }
+        }
+
+        public static Label AddNewLabel(string txt)
+        {
+            Label lbl = new Label(); //Khởi tạo đối tượng Textbox có tên là txt
+            lbl.Text = txt;
+            return lbl; //Trả lại đối tượng txt với các thuộc tính kèm theo
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -71,6 +108,17 @@ namespace WindowsForms_QLSH.Forms
             String title = "Phiếu tạm";
             TabPage bill = new TabPage(title);
             tabControl1.TabPages.Add(bill);
+
+        }
+
+        private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+    
+        }
+
+        private void btnThanhToan_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

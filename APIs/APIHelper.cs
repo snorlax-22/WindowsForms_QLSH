@@ -11,6 +11,7 @@ namespace WindowsForms_QLSH.APIs
     {
         public System.Net.HttpWebRequest initRequest(string apiCalled, string method)
         {
+            //Tạo ra 1 http request + Add bearer token + add Accept Type + add contentType
             HttpWebRequest httpWebRequest = WebRequest.Create(Program.baseURL + apiCalled) as HttpWebRequest;
             httpWebRequest.Method = method;
             httpWebRequest.Accept = Program.contentType;
