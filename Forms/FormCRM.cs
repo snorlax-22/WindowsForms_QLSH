@@ -63,8 +63,18 @@ namespace WindowsForms_QLSH
                 //join các biến lấy từ người dùng thành json string để truyền vào API PostAccount
                 var body = "{\"email\":\"" + email + "\",\"name\":\"" + name + "\",\"phone\":\"" + phone + "\",\"address\":\"" + address + "\",\"password\":\"" + pw + "\",\"idRole\":" + idRole + "}";
 
+                //postAPIs.PostAcount(body);
+                var a = postAPIs.PostAcount(body)["responseCode"]["code"];
+                int responseCode = Convert.ToInt32(((int)a).ToString());
+                if (responseCode != 0)
+                {
+                    MessageBox.Show(a.ToString(), "Lỗi gọi API");
+                }
+                else
+                {
+                    MessageBox.Show("Thêm tài khoản thành công");
+                }
 
-                postAPIs.PostAcount(body);
             }
             catch (Exception objEx)
             {
