@@ -64,11 +64,11 @@ namespace WindowsForms_QLSH
                 var body = "{\"email\":\"" + email + "\",\"name\":\"" + name + "\",\"phone\":\"" + phone + "\",\"address\":\"" + address + "\",\"password\":\"" + pw + "\",\"idRole\":" + idRole + "}";
 
                 //postAPIs.PostAcount(body);
-                var a = postAPIs.PostAcount(body)["responseCode"]["code"];
-                int responseCode = Convert.ToInt32(((int)a).ToString());
+                var response = postAPIs.PostAcount(body)["responseCode"]["code"];
+                int responseCode = Convert.ToInt32(((int)response).ToString());
                 if (responseCode != 0)
                 {
-                    MessageBox.Show(a.ToString(), "Lỗi gọi API");
+                    MessageBox.Show(response.ToString(), "Lỗi gọi API");
                 }
                 else
                 {

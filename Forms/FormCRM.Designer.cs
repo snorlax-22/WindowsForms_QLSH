@@ -49,7 +49,7 @@ namespace WindowsForms_QLSH
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(58, 75);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 17);
+            this.label4.Size = new System.Drawing.Size(44, 16);
             this.label4.TabIndex = 6;
             this.label4.Text = "Email:";
             // 
@@ -65,7 +65,7 @@ namespace WindowsForms_QLSH
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(40, 119);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 17);
+            this.label5.Size = new System.Drawing.Size(64, 16);
             this.label5.TabIndex = 8;
             this.label5.Text = "Mật khẩu:";
             // 
@@ -79,15 +79,15 @@ namespace WindowsForms_QLSH
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(37, 172);
+            this.label6.Location = new System.Drawing.Point(37, 169);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(76, 17);
+            this.label6.Size = new System.Drawing.Size(69, 16);
             this.label6.TabIndex = 10;
             this.label6.Text = "Điện thoại:";
             // 
             // txtPhone
             // 
-            this.txtPhone.Location = new System.Drawing.Point(120, 169);
+            this.txtPhone.Location = new System.Drawing.Point(120, 167);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(100, 22);
             this.txtPhone.TabIndex = 11;
@@ -97,16 +97,16 @@ namespace WindowsForms_QLSH
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(49, 216);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 17);
+            this.label1.Size = new System.Drawing.Size(50, 16);
             this.label1.TabIndex = 12;
             this.label1.Text = "Địa chỉ:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(67, 274);
+            this.label2.Location = new System.Drawing.Point(67, 269);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 17);
+            this.label2.Size = new System.Drawing.Size(34, 16);
             this.label2.TabIndex = 13;
             this.label2.Text = "Tên:";
             // 
@@ -115,7 +115,7 @@ namespace WindowsForms_QLSH
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(57, 317);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 17);
+            this.label3.Size = new System.Drawing.Size(48, 16);
             this.label3.TabIndex = 14;
             this.label3.Text = "Vai trò:";
             // 
@@ -128,7 +128,7 @@ namespace WindowsForms_QLSH
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(120, 269);
+            this.txtName.Location = new System.Drawing.Point(120, 265);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(100, 22);
             this.txtName.TabIndex = 16;
