@@ -26,7 +26,18 @@ namespace WindowsForms_QLSH
 
             JToken listflowerjson = getAPIs.GetAllRole()["responseData"]["data"];
 
+            JToken listAccountJson = getAPIs.GetAllAccounts()["responseData"]["data"];
+
+
             IList<Role> roles = listflowerjson.ToObject<IList<Role>>();
+            IList<User> users = listAccountJson.ToObject<IList<User>>();
+
+            dataGridView1.DataSource = users;
+            this.dataGridView1.Columns["updated"].Visible = false;
+            this.dataGridView1.Columns["isDeleted"].Visible = false;
+            this.dataGridView1.Columns["id"].Visible = false;
+
+
             List<string> nameRole = new List<string>();
 
             //Set key và data cho combobox roles
@@ -35,13 +46,9 @@ namespace WindowsForms_QLSH
             List<Object> items = new List<Object>();
             foreach (var item in roles)
             {
-
                 items.Add(new { Text = item.roleName, Value = item.id });
-
             }
-
             cbbRoles.DataSource = items;
-
         }
 
         private void cbbRoles_SelectedIndexChanged(object sender, EventArgs e)
@@ -73,8 +80,12 @@ namespace WindowsForms_QLSH
                 else
                 {
                     MessageBox.Show("Thêm tài khoản thành công");
+                    dataGridView1.Update();
+                    dataGridView1.Refresh();
+                    JToken listAccountJson = getAPIs.GetAllAccounts()["responseData"]["data"];
+                    IList<User> users = listAccountJson.ToObject<IList<User>>();
+                    dataGridView1.DataSource = users;
                 }
-
             }
             catch (Exception objEx)
             {
