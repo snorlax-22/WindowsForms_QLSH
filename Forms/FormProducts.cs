@@ -92,5 +92,40 @@ namespace WindowsForms_QLSH
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Flower flower = new Flower();
+            byte[] a = null;
+            OpenFileDialog fileOpen = new OpenFileDialog();
+            fileOpen.Title = "Open Image file";
+            fileOpen.Filter = "JPG Files (*.jpg)| *.jpg";
+            if (fileOpen.ShowDialog() == DialogResult.OK)
+            {
+                 a = imageToByteArray(Image.FromFile(fileOpen.FileName));
+            }
+            string base64String = Convert.ToBase64String(a, 0, a.Length);
+            fileOpen.Dispose();
+             
+
+            Console.WriteLine(a);
+            Console.WriteLine(base64String);
+
+        }
+
+        public byte[] imageToByteArray(System.Drawing.Image imageIn)
+        {
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+            return ms.ToArray();
+        }
+
+        //Byte array to photo
+        public Image byteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
+        }
     }
 }

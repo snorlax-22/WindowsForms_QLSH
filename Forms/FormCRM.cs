@@ -24,21 +24,49 @@ namespace WindowsForms_QLSH
         {
             InitializeComponent();
 
-            JToken listflowerjson = getAPIs.GetAllRole()["responseData"]["data"];
-
             JToken listAccountJson = getAPIs.GetAllAccounts()["responseData"]["data"];
 
+            JToken listRolesJson = getAPIs.GetAllRole()["responseData"]["data"];
 
-            IList<Role> roles = listflowerjson.ToObject<IList<Role>>();
+            IList<Role> roles = listRolesJson.ToObject<IList<Role>>();
             IList<User> users = listAccountJson.ToObject<IList<User>>();
+            foreach(var item in users)
+            {
+                DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                dateTime = dateTime.AddMilliseconds(Double.Parse(item.created)).ToLocalTime();              
+                item.created = dateTime.ToString();
+            }
+           
+            foreach (var user in users)
+            {
+                foreach (var role in roles)
+                {
+                    if (user.idRole.Equals(role.id.ToString()))
+                    {
+                        user.idRole = role.roleName;
+                    }
+                }
+            }
 
             dataGridView1.DataSource = users;
+
             this.dataGridView1.Columns["updated"].Visible = false;
             this.dataGridView1.Columns["isDeleted"].Visible = false;
             this.dataGridView1.Columns["id"].Visible = false;
+            this.dataGridView1.Columns["created"].HeaderText = "Ngày tạo";
+            this.dataGridView1.Columns["idRole"].HeaderText = "Vai trò";
 
-
-            List<string> nameRole = new List<string>();
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(238, 239, 249);
+            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.SeaGreen;
+            dataGridView1.DefaultCellStyle.SelectionForeColor = Color.WhiteSmoke;
+            dataGridView1.BackgroundColor = Color.FromArgb(30, 30, 30);
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("MS Reference Sans Serif", 10);
+            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(37, 37, 38);
+            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
 
             //Set key và data cho combobox roles
             cbbRoles.DisplayMember = "Text";
@@ -93,6 +121,16 @@ namespace WindowsForms_QLSH
                 string strErrorMessageDetail = objEx.ToString();
                 MessageBox.Show(strErrorMessageDetail, strErrorMessage);
             }
+        }
+
+        private void fileSystemWatcher1_Changed(object sender, System.IO.FileSystemEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           
         }
     }
 }

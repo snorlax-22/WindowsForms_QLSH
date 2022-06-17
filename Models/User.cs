@@ -17,6 +17,6 @@ namespace WindowsForms_QLSH
         public string created { get; set; }
         public string updated { get; set; }
         public Boolean isDeleted { get; set; }
-        public int idRole { get; set; }
+        public string idRole { get; set; }
     }
 }

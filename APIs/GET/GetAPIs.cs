@@ -15,6 +15,26 @@ namespace WindowsForms_QLSH.APIs
     class GetAPIs
     {
         APIHelper apiHelper = new APIHelper();
+
+        public JObject GetChart()
+        {
+
+            //bước 1: tạo httpwebrequest + tên API + phương thức
+            HttpWebRequest httpWebRequest = apiHelper.initRequest("api/v1/GetChart", "POST");
+
+            //bước 2: tạo body để gửi, ở đây body là {}
+            createSendBody(httpWebRequest, null);
+
+            //bước 3: lấy kqua trả về từ response
+            StreamReader responseReader = CreateresponseReader(httpWebRequest);
+
+            //bước 4: parse response ra JObject
+            string strReceiveContent = responseReader.ReadToEnd();
+            JObject jObject = JObject.Parse(strReceiveContent);
+
+            return jObject;
+        }
+
         public JObject GetAllRole()
         {
            
@@ -52,6 +72,8 @@ namespace WindowsForms_QLSH.APIs
 
             return jObject;
         }
+
+
 
         public JObject GetAllFlower()
         {

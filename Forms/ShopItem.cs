@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.ComponentModel.Design;
 using System.Net;
 using System.Globalization;
+using System.IO;
 
 namespace WindowsForms_QLSH
 {
@@ -24,7 +25,24 @@ namespace WindowsForms_QLSH
             string priceformatted = price.ToString("#,###", cul.NumberFormat);
             label2.Text = priceformatted + "₫";
 
-            pictureBox1.Load("https://file1.dangcongsan.vn/DATA/0/2018/10/68___gi%E1%BA%BFng_l%C3%A0ng_qu%E1%BA%A3ng_ph%C3%BA_c%E1%BA%A7u__%E1%BB%A9ng_h%C3%B2a___%E1%BA%A3nh_vi%E1%BA%BFt_m%E1%BA%A1nh-16_51_07_908.jpg");
+            //load url của google
+            //pictureBox1.Load("https://file1.dangcongsan.vn/DATA/0/2018/10/68___gi%E1%BA%BFng_l%C3%A0ng_qu%E1%BA%A3ng_ph%C3%BA_c%E1%BA%A7u__%E1%BB%A9ng_h%C3%B2a___%E1%BA%A3nh_vi%E1%BA%BFt_m%E1%BA%A1nh-16_51_07_908.jpg");
+            //load url github
+            //pictureBox1.Load("https://fv9-3.failiem.lv/thumb_show.php?i=qwzgb77yr&view");
+            //load url của Dại
+            //pictureBox1.Load("https://raw.githubusercontent.com/dhmty/FLOWERSHOP_DND/main/WebContent/resources/images/flower/211204011549-ty2.jpg");
+            
+            //byte[] imageBytes = Convert.FromBase64String(pic);
+            //// Convert byte[] to Image
+            //using (var ms = new MemoryStream(imageBytes))
+            //{
+            //    pictureBox1.Image = Image.FromStream(ms, true);
+            //}
+
+            
+
+            
+
             pictureBox1.Tag = Color.Pink;
 
 
