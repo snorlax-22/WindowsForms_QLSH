@@ -49,7 +49,7 @@ namespace WindowsForms_QLSH.Forms
                 foreach (var item in listflower)
                 {
 
-                    ShopItem uc = new ShopItem(item.name, item.price)
+                    ShopItem uc = new ShopItem(item.name, item.price, item.image)
                     {
                         ForeColor = Color.Black,
                         Size = size,

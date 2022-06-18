@@ -32,7 +32,7 @@ namespace WindowsForms_QLSH
             InitializeComponent();
 
 
-            _ = githubAsync();
+            //_ = githubAsync();
 
 
                         this.FormBorderStyle = FormBorderStyle.None;

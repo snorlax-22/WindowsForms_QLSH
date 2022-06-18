@@ -37,7 +37,7 @@ namespace WindowsForms_QLSH
                 foreach (var item in listflower)
                 {
                    
-                    ShopItem uc = new ShopItem(item.name,item.price)
+                    ShopItem uc = new ShopItem(item.name,item.price,item.image)
                     {
                         ForeColor = Color.Black,
                         Size = size,
@@ -110,6 +110,11 @@ namespace WindowsForms_QLSH
 
             Console.WriteLine(a);
             Console.WriteLine(base64String);
+            byte[] imageBytes = Convert.FromBase64String(base64String);
+            using (var ms = new MemoryStream(imageBytes, 0, imageBytes.Length))
+            {
+                pictureBox1.Image = Image.FromStream(ms, true);
+            }
 
         }
 
