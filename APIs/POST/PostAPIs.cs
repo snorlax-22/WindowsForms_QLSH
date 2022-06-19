@@ -34,6 +34,25 @@ namespace WindowsForms_QLSH.APIs
             return jObject;
         }
 
+        public JObject PostFlower(string flower)
+        {
+
+            //bước 1: tạo httpwebrequest + tên API + phương thức
+            HttpWebRequest httpWebRequest = apiHelper.initRequest("api/v1/PostFlower", "POST");
+
+            //bước 2: tạo body để gửi, ở đây body là account (kiểu jSonstring)
+            createSendBody(httpWebRequest, flower);
+
+            //bước 3: lấy kqua trả về từ response
+            StreamReader responseReader = CreateresponseReader(httpWebRequest);
+
+            //bước 4: parse response ra JObject
+            string strReceiveContent = responseReader.ReadToEnd();
+            JObject jObject = JObject.Parse(strReceiveContent);
+
+            return jObject;
+        }
+
         private static void createSendBody(HttpWebRequest httpWebRequest, string strSendContent)
         {
             //JObject jObjectSendContent = null;

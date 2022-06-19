@@ -35,5 +35,7 @@ namespace WindowsForms_QLSH.Models
         public int status { get; set; }
 
 
+        
+
     }
 }

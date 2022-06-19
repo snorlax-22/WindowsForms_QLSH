@@ -17,29 +17,38 @@ namespace WindowsForms_QLSH
 {
     public partial class FormProducts : Form
     {
+        IList<Flower> flowers;
+        IList<Category> category;
+        IList<Models.Color> colors;
+        Size size = new Size(200, 200);
+        string base64String = "";
+        PostAPIs postAPIs = new PostAPIs();
+        GetAPIs getAPIs = new GetAPIs();
         public FormProducts(JToken listflowerjson)
         {
             GetAPIs getAPIs = new GetAPIs();
             InitializeComponent();
 
 
-            IList<Flower> flowers;
-            Size size= new Size(200, 200);
+            
             
             try
             {
+                var listcolorjson = getAPIs.GetAllColor()["responseData"]["data"];
+                var listcategoryjson = getAPIs.GetAllCategory()["responseData"]["data"];
+                
                 //var listflowerjson = getAPIs.GetAllFlower()["responseData"]["data"];
                 flowers = listflowerjson.ToObject<IList<Flower>>();
-
+                category = listcategoryjson.ToObject<IList<Category>>();
+                colors = listcolorjson.ToObject<IList<Models.Color>>();
                 //there are many flowers in the list with the same name, so we need to remove duplicate
                 var listflower = flowers.GroupBy(x => x.name).Select(y => y.First()).ToList();
 
                 foreach (var item in listflower)
                 {
-                   
                     ShopItem uc = new ShopItem(item.name,item.price,item.image)
                     {
-                        ForeColor = Color.Black,
+                        ForeColor = System.Drawing.Color.Black,
                         Size = size,
                         
                 };
@@ -61,23 +70,25 @@ namespace WindowsForms_QLSH
             }
 
 
-            //----------Cách gọi get API
-            //try
-            //{
-            //    var listFlowerJson = getAPIs.GetAllFlower()["responseData"]["data"];
+            //Set key và data cho combobox roles
+            cbbColors.DisplayMember = "Text";
+            cbbColors.ValueMember = "Value";
+            List<Object> items = new List<Object>();
+            foreach (var item in colors)
+            {
+                items.Add(new { Text = item.name, Value = item.id });
+            }
+            cbbColors.DataSource = items;
 
-            //    IList<Flower> flowers = listFlowerJson.ToObject<IList<Flower>>();
-
-            //    dataGridView1.DataSource = flowers;
-
-
-            //}
-            //catch (Exception objEx)
-            //{
-            //    string strErrorMessage = "Lỗi gọi API";
-            //    string strErrorMessageDetail = objEx.ToString();
-            //    MessageBox.Show(strErrorMessageDetail, strErrorMessage);
-            //}
+            //Set key và data cho combobox roles
+            cbbCategory.DisplayMember = "Text";
+            cbbCategory.ValueMember = "Value";
+            List<Object> items1 = new List<Object>();
+            foreach (var item in category)
+            {
+                items1.Add(new { Text = item.name, Value = item.id });
+            }
+            cbbCategory.DataSource = items1;
 
         }
 
@@ -104,7 +115,7 @@ namespace WindowsForms_QLSH
             {
                  a = imageToByteArray(Image.FromFile(fileOpen.FileName));
             }
-            string base64String = Convert.ToBase64String(a, 0, a.Length);
+            base64String = Convert.ToBase64String(a, 0, a.Length);
             fileOpen.Dispose();
              
 
@@ -131,6 +142,64 @@ namespace WindowsForms_QLSH
             MemoryStream ms = new MemoryStream(byteArrayIn);
             Image returnImage = Image.FromStream(ms);
             return returnImage;
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnThemHoa_Click(object sender, EventArgs e)
+        {
+            string name = txtName.Text;
+            string price = txtPrice.Text;
+            string contents = txtContents.Text;
+            string discount = txtDiscount.Text;
+            string image = base64String;
+            string imgDetail = rtbImgDetail.Text;
+            var a = cbbColors.SelectedValue;
+            var b = cbbCategory.SelectedValue;
+            string idColor = a.ToString();
+            string idCategory = b.ToString();
+
+            var body = "{\"name\":\"" + name + "\",\"price\":\"" + price + "\",\"contents\":\"" + contents + "\",\"discount\":\"" + discount + "\",\"image\":\"" + image + "\",\"imgDetail\":\"" + imgDetail +"\",\"idColor\":"+idColor+ ",\"idCategory\":" + idCategory + "}";
+            try
+            {
+                var response = postAPIs.PostFlower(body)["responseCode"];
+                //int responseCode = Convert.ToInt32(((int)response).ToString());                
+                int responseCode = 1;
+                if (responseCode != 0)
+                {
+                    MessageBox.Show(response.ToString(), "Lỗi gọi API");
+                }
+                else
+                {
+                    MessageBox.Show("Thanh toán thành công");
+                    JToken listFlowerJson = getAPIs.GetAllFlower()["responseData"]["data"];
+                    IList<Flower> flowers = listFlowerJson.ToObject<IList<Flower>>();
+                    var listflower = flowers.GroupBy(x => x.name).Select(y => y.First()).ToList();
+
+                    //foreach (var item in listflower)
+                    //{
+                    //    ShopItem uc = new ShopItem(item.name, item.price, item.image)
+                    //    {
+                    //        ForeColor = System.Drawing.Color.Black,
+                    //        Size = size,
+
+                    //    };
+                    //    flowLayoutPanel2.Controls.Add(uc);
+
+
+                    //}
+                    //flowLayoutPanel2.AutoScroll = true;
+                }
+            }
+            catch (Exception objEx)
+            {
+                string strErrorMessage = "Lỗi gọi API";
+                string strErrorMessageDetail = objEx.ToString();
+                MessageBox.Show(strErrorMessageDetail, strErrorMessage);
+            }
         }
     }
 }

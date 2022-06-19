@@ -187,6 +187,8 @@
       <DependentUpon>FormRevenue.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Chart.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Color.cs" />
     <Compile Include="Models\Flower.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Forms\Form1.cs">

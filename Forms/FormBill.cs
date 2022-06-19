@@ -51,7 +51,7 @@ namespace WindowsForms_QLSH.Forms
 
                     ShopItem uc = new ShopItem(item.name, item.price, item.image)
                     {
-                        ForeColor = Color.Black,
+                        ForeColor = System.Drawing.Color.Black,
                         Size = size,
 
                     };
