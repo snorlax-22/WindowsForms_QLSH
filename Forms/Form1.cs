@@ -39,7 +39,7 @@ namespace WindowsForms_QLSH
             this.WindowState = FormWindowState.Maximized;
 
             listflowerjson = getAPIs.GetAllFlower()["responseData"]["data"];
-            
+
         }
 
         public async Task githubAsync()
