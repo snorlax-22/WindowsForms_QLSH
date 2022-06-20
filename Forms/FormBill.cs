@@ -15,15 +15,18 @@ namespace WindowsForms_QLSH.Forms
 {
     public partial class FormBill : Form
     {
+        float totalBill = 0;
+        string listIdflower = "";
+        string listQuantity = "";
+        string listAmount = "";
+        GetAPIs getAPIs = new GetAPIs();
+        PostAPIs postAPIs = new PostAPIs();
         public FormBill(JToken listflowerjson)
         {
             //form POS (Tính tiền sản phẩm cho khách)
             InitializeComponent();
-            button1.Enabled = false;
-            button1.Visible = false;
-
-            float totalBill = 0;
-            GetAPIs getAPIs = new GetAPIs();
+           
+            
             List<Flower> listFlowerbill = new List<Flower>();
             
 
@@ -60,7 +63,14 @@ namespace WindowsForms_QLSH.Forms
                     uc.MouseDown += (sender, e) =>
                     {
                         totalBill = totalBill + item.price;
-  
+                        
+                        listIdflower = listIdflower +","+ item.id.ToString();
+                        listQuantity = listQuantity+","+"1";
+                        listAmount = listAmount + "," + item.price;
+
+                        
+
+
                         textBoxTotal.Text = "Tổng cộng: "+ totalBill.ToString();
 
                         //Mỗi lần click sẽ tạo ra 2 label có Text là tên hoa + giá tiền
@@ -118,6 +128,21 @@ namespace WindowsForms_QLSH.Forms
 
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
+
+            StringBuilder sb = new StringBuilder(listQuantity);
+            sb.Remove(0, 1);
+            listQuantity = sb.ToString();
+
+            StringBuilder sb1 = new StringBuilder(listIdflower);
+            sb1.Remove(0, 1);
+            listIdflower = sb1.ToString();
+
+            StringBuilder sb2 = new StringBuilder(listAmount);
+            sb2.Remove(0, 1);
+            listAmount = sb2.ToString();
+
+            var body = "{\"amount\":\"" + totalBill + "\",\"listIdflower\":\"" + listIdflower + "\",\"listQuantity\":\"" + listQuantity + "\",\"listAmount\":\"" + listAmount + "\"}";
+            postAPIs.PostPayment(body);
 
         }
     }

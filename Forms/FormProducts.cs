@@ -166,8 +166,7 @@ namespace WindowsForms_QLSH
             try
             {
                 var response = postAPIs.PostFlower(body)["responseCode"];
-                //int responseCode = Convert.ToInt32(((int)response).ToString());                
-                int responseCode = 1;
+                int responseCode = Convert.ToInt32(((int)response).ToString());
                 if (responseCode != 0)
                 {
                     MessageBox.Show(response.ToString(), "Lỗi gọi API");

@@ -156,12 +156,6 @@
     <Compile Include="APIs\GET\GetAPIs.cs" />
     <Compile Include="APIs\APIHelper.cs" />
     <Compile Include="APIs\POST\PostAPIs.cs" />
-    <Compile Include="Forms\FormAddUser.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormAddUser.Designer.cs">
-      <DependentUpon>FormAddUser.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormBill.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,9 +203,6 @@
     </Compile>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormAddUser.resx">
-      <DependentUpon>FormAddUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormBill.resx">
       <DependentUpon>FormBill.cs</DependentUpon>

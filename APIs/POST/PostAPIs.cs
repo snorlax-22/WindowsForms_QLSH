@@ -15,6 +15,26 @@ namespace WindowsForms_QLSH.APIs
     class PostAPIs
     {
         APIHelper apiHelper = new APIHelper();
+
+        public JObject PostPayment(string payment)
+        {
+
+            //bước 1: tạo httpwebrequest + tên API + phương thức
+            HttpWebRequest httpWebRequest = apiHelper.initRequest("api/v1/PostPayment", "POST");
+
+            //bước 2: tạo body để gửi, ở đây body là account (kiểu jSonstring)
+            createSendBody(httpWebRequest, payment);
+
+            //bước 3: lấy kqua trả về từ response
+            StreamReader responseReader = CreateresponseReader(httpWebRequest);
+
+            //bước 4: parse response ra JObject
+            string strReceiveContent = responseReader.ReadToEnd();
+            JObject jObject = JObject.Parse(strReceiveContent);
+
+            return jObject;
+        }
+
         public JObject PostAcount(string account)
         {
            
