@@ -15,6 +15,7 @@ namespace WindowsForms_QLSH.APIs
             HttpWebRequest httpWebRequest = WebRequest.Create(Program.baseURL + apiCalled) as HttpWebRequest;
             httpWebRequest.Method = method;
             httpWebRequest.Accept = Program.contentType;
+           
             httpWebRequest.Headers.Add("Authorization", Program.bearerToken);
             httpWebRequest.ContentType = Program.contentType;
 

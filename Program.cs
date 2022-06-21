@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsForms_QLSH.Forms;
@@ -22,7 +23,9 @@ namespace WindowsForms_QLSH
         [STAThread]
         static void Main()
         {
-
+            ServicePointManager.Expect100Continue = false;
+            ServicePointManager.DefaultConnectionLimit = 100;
+            ServicePointManager.MaxServicePointIdleTime = 5000;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormLogin());

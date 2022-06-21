@@ -27,16 +27,13 @@ namespace WindowsForms_QLSH.Forms
                 string email = txtEmail.Text;
                 string password = txtPassword.Text;
 
-                //join các biến lấy từ người dùng thành json string để truyền vào API PostAccount
+                ////join các biến lấy từ người dùng thành json string để truyền vào API PostAccount
                 var body = "{\"email\":\"" + email + "\",\"password\":\"" + password + "\"}";
 
-                var response = getAPIs.GetLogin(body)["responseData"]["id"];
+                var response = getAPIs.GetLogin(body)["responseCode"]["code"];
                 int responseCode = Convert.ToInt32(((int)response).ToString());
-                //Console.WriteLine(response);
-
-                
-                
-                if (responseCode == -1)
+                           
+                if (responseCode != 0)
                 {
                     MessageBox.Show("Sai tài khoản hoặc mật khẩu");
                     return;
@@ -44,13 +41,21 @@ namespace WindowsForms_QLSH.Forms
                 else
                 {
 
-                    var response2 = getAPIs.GetAllRole()["responseData"]["id"];
-                    //int responseCode2 = Convert.ToInt32(((int)response).ToString());
-                    Console.WriteLine(response2);
-                    Form1 form1 = new Form1();
-                    form1.ShowDialog();
-                    //MessageBox.Show("Login thành công");
-                    //return;
+                    var response2 = getAPIs.GetLogin(body)["responseData"]["idRole"];
+                    int responseCode2 = Convert.ToInt32(((int)response2).ToString());
+                    Console.WriteLine("oke", responseCode2, response2);
+              
+                   if(responseCode2 == 2 || responseCode2 == 1)
+                    {
+                        MessageBox.Show("Login thành công");
+
+                        Form1 form1 = new Form1();
+                        form1.ShowDialog();
+                    } else
+                    {
+                        MessageBox.Show("Bạn không có quyền truy cập");
+                        return;
+                    }
                 }
             }
             catch (Exception objEx)

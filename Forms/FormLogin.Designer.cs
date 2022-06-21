@@ -44,6 +44,7 @@ namespace WindowsForms_QLSH.Forms
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(306, 22);
             this.txtPassword.TabIndex = 12;
+            this.txtPassword.UseSystemPasswordChar = true;
             // 
             // txtEmail
             // 
