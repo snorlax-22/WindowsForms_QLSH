@@ -32,22 +32,22 @@ namespace WindowsForms_QLSH.Forms
                 Console.WriteLine(body);
                 //postAPIs.PostAcount(body);
                 var response = getAPIs.GetLogin(body)["responseData"];
-                int responseCode = Convert.ToInt32(((int)response).ToString());
+                //var responseCode = Convert.ToInt32(((int)response).ToString());
                 Console.WriteLine(response);
-                if (responseCode == -1)
-                {
-                    MessageBox.Show(response.ToString(), "Lỗi gọi API");
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show("Thêm tài khoản thành công");
-                    //dataGridView1.Update();
-                    //dataGridView1.Refresh();
-                    //JToken listAccountJson = getAPIs.GetAllAccounts()["responseData"]["data"];
-                    //IList<User> users = listAccountJson.ToObject<IList<User>>();
-                    //dataGridView1.DataSource = users;
-                }
+                //if (responseCode == -1)
+                //{
+                //    MessageBox.Show(response.ToString(), "Lỗi gọi API");
+                //    return;
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Thêm tài khoản thành công");
+                //    //dataGridView1.Update();
+                //    //dataGridView1.Refresh();
+                //    //JToken listAccountJson = getAPIs.GetAllAccounts()["responseData"]["data"];
+                //    //IList<User> users = listAccountJson.ToObject<IList<User>>();
+                //    //dataGridView1.DataSource = users;
+                //}
             }
             catch (Exception objEx)
             {

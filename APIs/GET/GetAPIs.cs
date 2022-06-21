@@ -134,14 +134,14 @@ namespace WindowsForms_QLSH.APIs
 
         private static void createSendBody(HttpWebRequest httpWebRequest, string strSendContent)
         {
-            JObject jObjectSendContent = null;
+            //JObject jObjectSendContent = null;
 
             if(strSendContent == null)
             {
                 strSendContent = string.Empty;
             }
             
-            strSendContent = JsonConvert.SerializeObject(jObjectSendContent);
+            //strSendContent = JsonConvert.SerializeObject(jObjectSendContent);
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
                 streamWriter.Write(strSendContent);
