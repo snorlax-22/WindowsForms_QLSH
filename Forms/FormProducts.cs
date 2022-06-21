@@ -106,26 +106,34 @@ namespace WindowsForms_QLSH
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Flower flower = new Flower();
-            byte[] a = null;
-            OpenFileDialog fileOpen = new OpenFileDialog();
-            fileOpen.Title = "Open Image file";
-            fileOpen.Filter = "JPG Files (*.jpg)| *.jpg";
-            if (fileOpen.ShowDialog() == DialogResult.OK)
-            {
-                 a = imageToByteArray(Image.FromFile(fileOpen.FileName));
-            }
-            base64String = Convert.ToBase64String(a, 0, a.Length);
-            fileOpen.Dispose();
-             
+            try {
+                Flower flower = new Flower();
+                byte[] a = null;
+                OpenFileDialog fileOpen = new OpenFileDialog();
+                fileOpen.Title = "Open Image file";
+                fileOpen.Filter = "JPG Files (*.jpg)| *.jpg";
+                if (fileOpen.ShowDialog() == DialogResult.OK)
+                {
+                    a = imageToByteArray(Image.FromFile(fileOpen.FileName));
+                }
+                base64String = Convert.ToBase64String(a, 0, a.Length);
+                fileOpen.Dispose();
 
-            Console.WriteLine(a);
-            Console.WriteLine(base64String);
-            byte[] imageBytes = Convert.FromBase64String(base64String);
-            using (var ms = new MemoryStream(imageBytes, 0, imageBytes.Length))
-            {
-                pictureBox1.Image = Image.FromStream(ms, true);
+
+                Console.WriteLine(a);
+                Console.WriteLine(base64String);
+                byte[] imageBytes = Convert.FromBase64String(base64String);
+                using (var ms = new MemoryStream(imageBytes, 0, imageBytes.Length))
+                {
+                    pictureBox1.Image = Image.FromStream(ms, true);
+                }
             }
+            catch(NullReferenceException n)
+            {
+                MessageBox.Show(n.ToString());
+            }
+
+            
 
         }
 
@@ -165,7 +173,7 @@ namespace WindowsForms_QLSH
             var body = "{\"name\":\"" + name + "\",\"price\":\"" + price + "\",\"contents\":\"" + contents + "\",\"discount\":\"" + discount + "\",\"image\":\"" + image + "\",\"imgDetail\":\"" + imgDetail +"\",\"idColor\":"+idColor+ ",\"idCategory\":" + idCategory + "}";
             try
             {
-                var response = postAPIs.PostFlower(body)["responseCode"];
+                var response = postAPIs.PostFlower(body)["responseCode"]["code"];
                 int responseCode = Convert.ToInt32(((int)response).ToString());
                 if (responseCode != 0)
                 {
@@ -173,24 +181,10 @@ namespace WindowsForms_QLSH
                 }
                 else
                 {
-                    MessageBox.Show("Thanh toán thành công");
+                    MessageBox.Show("Thêm hoa thành công");
                     JToken listFlowerJson = getAPIs.GetAllFlower()["responseData"]["data"];
                     IList<Flower> flowers = listFlowerJson.ToObject<IList<Flower>>();
                     var listflower = flowers.GroupBy(x => x.name).Select(y => y.First()).ToList();
-
-                    //foreach (var item in listflower)
-                    //{
-                    //    ShopItem uc = new ShopItem(item.name, item.price, item.image)
-                    //    {
-                    //        ForeColor = System.Drawing.Color.Black,
-                    //        Size = size,
-
-                    //    };
-                    //    flowLayoutPanel2.Controls.Add(uc);
-
-
-                    //}
-                    //flowLayoutPanel2.AutoScroll = true;
                 }
             }
             catch (Exception objEx)
