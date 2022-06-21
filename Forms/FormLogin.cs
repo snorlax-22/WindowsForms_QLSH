@@ -27,11 +27,13 @@ namespace WindowsForms_QLSH.Forms
                 string email = txtEmail.Text;
                 string password = txtPassword.Text;
 
-                //join các biến lấy từ người dùng thành json string để truyền vào API PostAccount
+                ////join các biến lấy từ người dùng thành json string để truyền vào API PostAccount
                 var body = "{\"email\":\"" + email + "\",\"password\":\"" + password + "\"}";
-                Console.WriteLine(body);
-                //postAPIs.PostAcount(body);
+                //var body1 = string.Empty;
+                //Console.WriteLine(body);
+                ////postAPIs.PostAcount(body);
                 var response = getAPIs.GetLogin(body)["responseData"];
+                //var response1 = getAPIs.GetAllRole()["responseData"];
                 //var responseCode = Convert.ToInt32(((int)response).ToString());
                 Console.WriteLine(response);
                 //if (responseCode == -1)

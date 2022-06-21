@@ -23,7 +23,7 @@ namespace WindowsForms_QLSH.APIs
             HttpWebRequest httpWebRequest = apiHelper.initRequest("api/v1/GetChart", "POST");
 
             //bước 2: tạo body để gửi, ở đây body là {}
-            createSendBody(httpWebRequest, null);
+            createSendBodyNull(httpWebRequest, null);
 
             //bước 3: lấy kqua trả về từ response
             StreamReader responseReader = CreateresponseReader(httpWebRequest);
@@ -40,9 +40,9 @@ namespace WindowsForms_QLSH.APIs
            
             //bước 1: tạo httpwebrequest + tên API + phương thức
             HttpWebRequest httpWebRequest = apiHelper.initRequest("api/v1/GetAllRole", "POST");
-            
+
             //bước 2: tạo body để gửi, ở đây body là {}
-            createSendBody(httpWebRequest,null);
+            createSendBodyNull(httpWebRequest,null);
 
             //bước 3: lấy kqua trả về từ response
             StreamReader responseReader = CreateresponseReader(httpWebRequest);
@@ -61,7 +61,7 @@ namespace WindowsForms_QLSH.APIs
             HttpWebRequest httpWebRequest = apiHelper.initRequest("api/v1/GetAllAccounts", "POST");
 
             //bước 2: tạo body để gửi, ở đây body là {}
-            createSendBody(httpWebRequest, null);
+            createSendBodyNull(httpWebRequest, null);
 
             //bước 3: lấy kqua trả về từ response
             StreamReader responseReader = CreateresponseReader(httpWebRequest);
@@ -80,7 +80,7 @@ namespace WindowsForms_QLSH.APIs
             HttpWebRequest httpWebRequest = apiHelper.initRequest("api/v1/GetAllColor", "POST");
 
             //bước 2: tạo body để gửi, ở đây body là {}
-            createSendBody(httpWebRequest, null);
+            createSendBodyNull(httpWebRequest, null);
 
             //bước 3: lấy kqua trả về từ response
             StreamReader responseReader = CreateresponseReader(httpWebRequest);
@@ -99,7 +99,7 @@ namespace WindowsForms_QLSH.APIs
             HttpWebRequest httpWebRequest = apiHelper.initRequest("api/v1/GetAllCategory", "POST");
 
             //bước 2: tạo body để gửi, ở đây body là {}
-            createSendBody(httpWebRequest, null);
+            createSendBodyNull(httpWebRequest, null);
 
             //bước 3: lấy kqua trả về từ response
             StreamReader responseReader = CreateresponseReader(httpWebRequest);
@@ -118,7 +118,7 @@ namespace WindowsForms_QLSH.APIs
             HttpWebRequest httpWebRequest = apiHelper.initRequest("api/v1/GetAllFlower", "POST");
 
             //bước 2: tạo body để gửi, ở đây body là {}
-            createSendBody(httpWebRequest, null);
+            createSendBodyNull(httpWebRequest, null);
 
             //bước 3: lấy kqua trả về từ response
             StreamReader responseReader = CreateresponseReader(httpWebRequest);
@@ -137,7 +137,7 @@ namespace WindowsForms_QLSH.APIs
             HttpWebRequest httpWebRequest = apiHelper.initRequest("api/v1/GetAllTransaction", "POST");
 
             //bước 2: tạo body để gửi, ở đây body là {}== null
-            createSendBody(httpWebRequest, null);
+            createSendBodyNull(httpWebRequest, null);
 
             //bước 3: lấy kqua trả về từ response
             StreamReader responseReader = CreateresponseReader(httpWebRequest);
@@ -167,17 +167,33 @@ namespace WindowsForms_QLSH.APIs
 
             return jObject;
         }
-
         private static void createSendBody(HttpWebRequest httpWebRequest, string strSendContent)
         {
             //JObject jObjectSendContent = null;
 
-            if(strSendContent == null)
+            if (strSendContent == null)
             {
                 strSendContent = string.Empty;
             }
-            
+
             //strSendContent = JsonConvert.SerializeObject(jObjectSendContent);
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            {
+                streamWriter.Write(strSendContent);
+            }
+        }
+
+
+        private static void createSendBodyNull(HttpWebRequest httpWebRequest, string strSendContent)
+        {
+            JObject jObjectSendContent = null;
+
+            if (strSendContent == null)
+            {
+                strSendContent = string.Empty;
+            }
+
+            strSendContent = JsonConvert.SerializeObject(jObjectSendContent);
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
                 streamWriter.Write(strSendContent);

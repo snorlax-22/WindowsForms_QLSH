@@ -35,20 +35,14 @@ namespace WindowsForms_QLSH
             //_ = githubAsync();
 
 
-                        this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
 
             listflowerjson = getAPIs.GetAllFlower()["responseData"]["data"];
 
         }
 
-        public async Task githubAsync()
-        {
-            var gitHubClient = new GitHubClient(new ProductHeaderValue("MyCoolApp"));
-            var user = await gitHubClient.User.Get("snorlax-22");
-            gitHubClient.Credentials = new Credentials("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");
-            Console.WriteLine($"Woah! Dave has {user.Login} public repositories.");
-        }
+
 
         public void openChildForm(Form childForm, object btnSender)
         {
