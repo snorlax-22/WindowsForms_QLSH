@@ -203,6 +203,7 @@ namespace WindowsForms_QLSH.APIs
         private static StreamReader CreateresponseReader(HttpWebRequest httpWebRequest)
         {
             HttpWebResponse httpWebResponse = httpWebRequest.GetResponse() as HttpWebResponse;
+            Console.WriteLine(httpWebResponse);
             if (httpWebResponse.StatusCode != HttpStatusCode.OK)
             {
                 string strErrorMessageDetail = httpWebResponse.StatusCode.ToString();
