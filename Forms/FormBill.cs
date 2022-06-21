@@ -142,8 +142,19 @@ namespace WindowsForms_QLSH.Forms
             listAmount = sb2.ToString();
 
             var body = "{\"amount\":\"" + totalBill + "\",\"listIdflower\":\"" + listIdflower + "\",\"listQuantity\":\"" + listQuantity + "\",\"listAmount\":\"" + listAmount + "\"}";
-            postAPIs.PostPayment(body);
-
+            var response = postAPIs.PostPayment(body)["responseCode"]["code"];
+            int responseCode = Convert.ToInt32(((int)response).ToString());
+            if (responseCode != 0)
+            {
+                MessageBox.Show(response.ToString(), "Lỗi gọi API");
+            }
+            else
+            {
+                MessageBox.Show("Thanh toán thành công");
+                JToken listFlowerJson = getAPIs.GetAllFlower()["responseData"]["data"];
+                IList<Flower> flowers = listFlowerJson.ToObject<IList<Flower>>();
+                var listflower = flowers.GroupBy(x => x.name).Select(y => y.First()).ToList();
+            }
         }
     }
 }

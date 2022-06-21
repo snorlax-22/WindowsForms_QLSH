@@ -32,7 +32,6 @@
             this.button5 = new System.Windows.Forms.Button();
             this.btnCRM = new System.Windows.Forms.Button();
             this.btnProducts = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.title = new System.Windows.Forms.Panel();
@@ -53,7 +52,6 @@
             this.panelMenu.Controls.Add(this.button5);
             this.panelMenu.Controls.Add(this.btnCRM);
             this.panelMenu.Controls.Add(this.btnProducts);
-            this.panelMenu.Controls.Add(this.button2);
             this.panelMenu.Controls.Add(this.button1);
             this.panelMenu.Controls.Add(this.panel1);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
@@ -71,7 +69,7 @@
             this.button5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.button5.Image = global::WindowsForms_QLSH.Properties.Resources.icons8_revenue_50;
             this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.Location = new System.Drawing.Point(0, 351);
+            this.button5.Location = new System.Drawing.Point(0, 281);
             this.button5.Margin = new System.Windows.Forms.Padding(3, 12, 3, 12);
             this.button5.Name = "button5";
             this.button5.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
@@ -92,7 +90,7 @@
             this.btnCRM.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnCRM.Image = global::WindowsForms_QLSH.Properties.Resources.icons8_crm_50__1_;
             this.btnCRM.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCRM.Location = new System.Drawing.Point(0, 281);
+            this.btnCRM.Location = new System.Drawing.Point(0, 211);
             this.btnCRM.Margin = new System.Windows.Forms.Padding(3, 12, 3, 12);
             this.btnCRM.Name = "btnCRM";
             this.btnCRM.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
@@ -113,7 +111,7 @@
             this.btnProducts.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnProducts.Image = global::WindowsForms_QLSH.Properties.Resources.icons8_flower_doodle_50;
             this.btnProducts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnProducts.Location = new System.Drawing.Point(0, 211);
+            this.btnProducts.Location = new System.Drawing.Point(0, 141);
             this.btnProducts.Margin = new System.Windows.Forms.Padding(3, 12, 3, 12);
             this.btnProducts.Name = "btnProducts";
             this.btnProducts.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
@@ -124,27 +122,6 @@
             this.btnProducts.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnProducts.UseVisualStyleBackColor = true;
             this.btnProducts.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button2.Image = global::WindowsForms_QLSH.Properties.Resources.icons8_paid_bill_50__1_;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(0, 141);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 12, 3, 12);
-            this.button2.Name = "button2";
-            this.button2.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.button2.Size = new System.Drawing.Size(281, 70);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Phiếu Xuất";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -161,7 +138,7 @@
             this.button1.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.button1.Size = new System.Drawing.Size(281, 70);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Phiếu Tạm";
+            this.button1.Text = "Phiếu Xuất";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseVisualStyleBackColor = true;
@@ -300,7 +277,6 @@
         private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.Button btnCRM;
         private System.Windows.Forms.Button btnProducts;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel title;
