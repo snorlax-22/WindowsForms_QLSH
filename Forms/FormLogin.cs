@@ -29,25 +29,29 @@ namespace WindowsForms_QLSH.Forms
 
                 //join các biến lấy từ người dùng thành json string để truyền vào API PostAccount
                 var body = "{\"email\":\"" + email + "\",\"password\":\"" + password + "\"}";
-                Console.WriteLine(body);
-                //postAPIs.PostAcount(body);
-                var response = getAPIs.GetLogin(body)["responseData"];
-                //var responseCode = Convert.ToInt32(((int)response).ToString());
-                Console.WriteLine(response);
-                //if (responseCode == -1)
-                //{
-                //    MessageBox.Show(response.ToString(), "Lỗi gọi API");
-                //    return;
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Thêm tài khoản thành công");
-                //    //dataGridView1.Update();
-                //    //dataGridView1.Refresh();
-                //    //JToken listAccountJson = getAPIs.GetAllAccounts()["responseData"]["data"];
-                //    //IList<User> users = listAccountJson.ToObject<IList<User>>();
-                //    //dataGridView1.DataSource = users;
-                //}
+
+                var response = getAPIs.GetLogin(body)["responseData"]["id"];
+                int responseCode = Convert.ToInt32(((int)response).ToString());
+                //Console.WriteLine(response);
+
+                
+                
+                if (responseCode == -1)
+                {
+                    MessageBox.Show("Sai tài khoản hoặc mật khẩu");
+                    return;
+                }
+                else
+                {
+
+                    var response2 = getAPIs.GetAllRole()["responseData"]["id"];
+                    //int responseCode2 = Convert.ToInt32(((int)response).ToString());
+                    Console.WriteLine(response2);
+                    Form1 form1 = new Form1();
+                    form1.ShowDialog();
+                    //MessageBox.Show("Login thành công");
+                    //return;
+                }
             }
             catch (Exception objEx)
             {
